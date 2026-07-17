@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+fabric_cicd.error.log
+.venv/

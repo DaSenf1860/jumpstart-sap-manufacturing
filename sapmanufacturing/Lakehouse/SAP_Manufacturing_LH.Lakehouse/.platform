@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "SAP_Manufacturing_LH",
+    "description": "Synthetic SAP PP / shopfloor manufacturing data (Delta tables)."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a1f0c0de-0001-4a00-9000-5a70da7a0001"
+  }
+}

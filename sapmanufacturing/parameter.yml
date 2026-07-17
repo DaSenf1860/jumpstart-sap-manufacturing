@@ -1,0 +1,10 @@
+find_replace:
+  # Bind the GenerateSapData notebook's default lakehouse to the deployed one.
+  - find_value: "__LAKEHOUSE_ID__"
+    replace_value:
+      _ALL_: "$items.Lakehouse.SAP_Manufacturing_LH.$id"
+    item_type: "Notebook"
+  - find_value: "__WORKSPACE_ID__"
+    replace_value:
+      _ALL_: "$workspace.$id"
+    item_type: "Notebook"
