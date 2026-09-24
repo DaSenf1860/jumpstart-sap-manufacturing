@@ -1,5 +1,5 @@
 find_replace:
-  # Bind the GenerateSapData notebook's default lakehouse to the deployed one.
+  # --- Notebooks: bind the default lakehouse to the deployed one -------------
   - find_value: "__LAKEHOUSE_ID__"
     replace_value:
       _ALL_: "$items.Lakehouse.SAP_Manufacturing_LH.$id"
@@ -8,3 +8,23 @@ find_replace:
     replace_value:
       _ALL_: "$workspace.$id"
     item_type: "Notebook"
+
+  # --- SemanticModel: bind the Direct Lake expression to the deployed lakehouse
+  - find_value: "__LAKEHOUSE_ID__"
+    replace_value:
+      _ALL_: "$items.Lakehouse.SAP_Manufacturing_LH.$id"
+    item_type: "SemanticModel"
+  - find_value: "__WORKSPACE_ID__"
+    replace_value:
+      _ALL_: "$workspace.$id"
+    item_type: "SemanticModel"
+
+  # --- DataAgent: bind the datasource to the deployed model + workspace -------
+  - find_value: "__SEMANTIC_MODEL_ID__"
+    replace_value:
+      _ALL_: "$items.SemanticModel.SAP_Manufacturing_Model.$id"
+    item_type: "DataAgent"
+  - find_value: "__WORKSPACE_ID__"
+    replace_value:
+      _ALL_: "$workspace.$id"
+    item_type: "DataAgent"

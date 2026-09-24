@@ -1,0 +1,70 @@
+table MATDOC
+
+	column Mblnr
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Mblnr
+
+	column Line
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Line
+
+	column Matnr
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Matnr
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column LGORT
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LGORT
+
+	column MovementType
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MovementType
+
+	column Quantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+	column Unit
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Unit
+
+	column PostingDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: PostingDate
+
+	column DocumentDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: DocumentDate
+
+	column Order
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Order
+
+	column CostCenter
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CostCenter
+
+	partition MATDOC = entity
+		mode: directLake
+		source
+			entityName: matdoc
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

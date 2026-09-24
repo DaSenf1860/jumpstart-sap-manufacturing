@@ -1,0 +1,60 @@
+table SOP_Targets
+
+	/// S&OP target quantity
+	measure 'Total Target Quantity' = SUM('SOP_Targets'[TargetQuantity])
+		formatString: #,0
+
+	/// S&OP actual quantity
+	measure 'Total SOP Actual Quantity' = SUM('SOP_Targets'[ActualQuantity])
+		formatString: #,0
+
+	/// Deviation of actual vs target
+	measure 'SOP Deviation' = SUM('SOP_Targets'[Deviation])
+		formatString: #,0
+
+	column ProductGroup
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductGroup
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column Period
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Period
+
+	column TargetQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: TargetQuantity
+
+	column ActualQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: ActualQuantity
+
+	column Deviation
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Deviation
+
+	column Version
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Version
+
+	partition SOP_Targets = entity
+		mode: directLake
+		source
+			entityName: sop_targets
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

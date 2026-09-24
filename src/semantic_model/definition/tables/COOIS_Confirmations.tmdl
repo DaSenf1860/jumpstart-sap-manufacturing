@@ -1,0 +1,105 @@
+table COOIS_Confirmations
+
+	/// Confirmed good quantity
+	measure 'Total Yield' = SUM('COOIS_Confirmations'[YieldQuantity])
+		formatString: #,0
+
+	/// Confirmed scrap quantity
+	measure 'Total Scrap' = SUM('COOIS_Confirmations'[ScrapQuantity])
+		formatString: #,0
+
+	/// Confirmed rework quantity
+	measure 'Total Rework' = SUM('COOIS_Confirmations'[ReworkQuantity])
+		formatString: #,0
+
+	/// Scrap relative to yield
+	measure 'Scrap Rate' = DIVIDE([Total Scrap], [Total Yield])
+		formatString: 0.0%
+
+	/// Mean delay between actual completion and SAP posting, in hours
+	measure 'Avg Posting Delay Hours' = AVERAGE('COOIS_Confirmations'[DelayHours])
+		formatString: 0.0
+
+	column Confirmation
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Confirmation
+
+	column Order
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Order
+
+	column Operation
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Operation
+
+	column WorkCenter
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WorkCenter
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column YieldQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: YieldQuantity
+
+	column ScrapQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: ScrapQuantity
+
+	column ReworkQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: ReworkQuantity
+
+	column ActualMachineTime
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: ActualMachineTime
+
+	column ActualLaborTime
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: ActualLaborTime
+
+	column ActualEnd
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		summarizeBy: none
+		sourceColumn: ActualEnd
+
+	column SAP_PostingTime
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		summarizeBy: none
+		sourceColumn: SAP_PostingTime
+
+	column DelayHours
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: DelayHours
+
+	column Cancelled
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Cancelled
+
+	column Material
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Material
+
+	partition COOIS_Confirmations = entity
+		mode: directLake
+		source
+			entityName: coois_confirmations
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

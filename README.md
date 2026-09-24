@@ -11,13 +11,16 @@ grounded Fabric **Data Agent** on top of a **Direct Lake semantic model**.
 |------|------|---------|
 | `SAP_Manufacturing_LH` | Lakehouse | 17 synthetic SAP Delta tables |
 | `GenerateSapData` | Notebook | Synthesizes the tables |
-| `PostDeploymentNotebook` | Notebook | **Entry point** — orchestrates the build |
-| `SAP_Manufacturing_Model` | Semantic model | Direct Lake model + SAP measures (built at runtime) |
-| `SAP_Manufacturing_DataAgent` | Data Agent | Grounded SAP PP analysis agent (built at runtime) |
+| `SAP_Manufacturing_Model` | Semantic model | Direct Lake model + SAP measures |
+| `SAP_Manufacturing_DataAgent` | Data Agent | Grounded SAP PP analysis agent |
+| `PostDeploymentNotebook` | Notebook | **Entry point** — seeds data + reframes the model |
 
-The semantic model and data agent are built by the PostDeploymentNotebook at
-runtime (the Direct Lake connection needs the deployed lakehouse id), so the
-jumpstart is portable across workspaces with no ID substitution.
+All five items are deployed by **fabric-cicd** from the git tree. The semantic
+model and data agent carry placeholder ids (`__WORKSPACE_ID__`,
+`__LAKEHOUSE_ID__`, `__SEMANTIC_MODEL_ID__`) that `parameter.yml` resolves to the
+deployed lakehouse/model at deploy time — so the jumpstart stays portable across
+workspaces with no manual id edits. The PostDeploymentNotebook only seeds the SAP
+data and reframes the Direct Lake model (which needs the *live* lakehouse tables).
 
 ## Data model
 
@@ -31,13 +34,15 @@ confirmations (`COOIS_Confirmations`), missing parts (`CO24`), material movement
 
 ```
 build_jumpstart.py          # generator — assembles the item tree from ./src
+extract_definitions.py      # one-off — captured the SM/DA git defs into ./src
 deploy.py                   # standalone fabric-cicd deploy
-src/                        # source modules inlined into the notebooks
-  gen_sap_data.py           #   data synthesizer
-  model_builder.py          #   Direct Lake TMDL builder + deploy/refresh
-  agent_setup.py            #   data agent create/configure/publish
+src/                        # source artifacts assembled into the tree
+  gen_sap_data.py           #   data synthesizer (inlined into GenerateSapData)
+  refresh_model.py          #   runtime Direct Lake reframe (inlined into PostDeployment)
+  semantic_model/           #   parameterized Direct Lake TMDL definition
+  data_agent/               #   parameterized data agent definition
 sapmanufacturing/           # GENERATED deployable tree (fabric-cicd git format)
-  Lakehouse/…  Develop/…  parameter.yml  Readme.md
+  Lakehouse/…  Develop/…  SemanticModel/…  DataAgent/…  parameter.yml  Readme.md
 ```
 
 Regenerate the tree after editing `src/`:

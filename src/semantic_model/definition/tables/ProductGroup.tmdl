@@ -1,0 +1,18 @@
+table ProductGroup
+
+	column ProductGroup
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductGroup
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	partition ProductGroup = entity
+		mode: directLake
+		source
+			entityName: productgroup
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

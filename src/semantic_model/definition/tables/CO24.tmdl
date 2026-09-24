@@ -1,0 +1,72 @@
+table CO24
+
+	/// Number of components with a shortage
+	measure 'Missing Part Count' = CALCULATE(COUNTROWS('CO24'), 'CO24'[MissingPart] = 1)
+		formatString: #,0
+
+	/// Sum of all shortage quantities
+	measure 'Total Shortage Quantity' = SUM('CO24'[ShortageQuantity])
+		formatString: #,0
+
+	column Order
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Order
+
+	column Component
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Component
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column LGORT
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LGORT
+
+	column Reqmnt_qty
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Reqmnt_qty
+
+	column Comm_qty
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Comm_qty
+
+	column Qty_issued
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Qty_issued
+
+	column ShortageQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: ShortageQuantity
+
+	column MissingPart
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: MissingPart
+
+	column RequirementDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: RequirementDate
+
+	column ComponentText
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ComponentText
+
+	partition CO24 = entity
+		mode: directLake
+		source
+			entityName: co24
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

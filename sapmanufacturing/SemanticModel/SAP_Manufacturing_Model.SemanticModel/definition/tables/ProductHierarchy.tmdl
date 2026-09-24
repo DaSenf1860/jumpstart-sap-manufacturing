@@ -1,0 +1,28 @@
+table ProductHierarchy
+
+	column ProductHierarchy
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductHierarchy
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	column Level
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Level
+
+	column Parent
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Parent
+
+	partition ProductHierarchy = entity
+		mode: directLake
+		source
+			entityName: producthierarchy
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

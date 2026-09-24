@@ -1,0 +1,53 @@
+table WorkCenters
+
+	column WorkCenter
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WorkCenter
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	column NGRAD
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: NGRAD
+
+	column EINZH
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: EINZH
+
+	column AZNOR
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: AZNOR
+
+	column CapacityCategory
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CapacityCategory
+
+	column Bottleneck
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Bottleneck
+
+	column TheoreticalCapacityHrDay
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: TheoreticalCapacityHrDay
+
+	partition WorkCenters = entity
+		mode: directLake
+		source
+			entityName: workcenters
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

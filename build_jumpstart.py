@@ -1,7 +1,14 @@
 """Generate the Fabric jumpstart item tree (fabric-cicd git format).
 
 Assembles a deployable workspace tree under ./sapmanufacturing from the source
-modules in ./src. Notebook definitions use the Fabric notebook-content.py format.
+modules in ./src. The Lakehouse, GenerateSapData + PostDeployment notebooks, the
+**SemanticModel** and the **DataAgent** are all deployed by fabric-cicd from the
+git tree. The SemanticModel + DataAgent definitions live as parameterized template
+trees under src/ (see extract_definitions.py); their workspace/lakehouse/model
+GUIDs are placeholders that parameter.yml resolves at deploy time.
+
+The PostDeploymentNotebook no longer *creates* the model or agent - it only seeds
+the SAP data and reframes the (already-deployed) Direct Lake model.
 
 Run:  python build_jumpstart.py
 """
@@ -18,6 +25,8 @@ LOGICAL_IDS = {
     "SAP_Manufacturing_LH.Lakehouse": "a1f0c0de-0001-4a00-9000-5a70da7a0001",
     "GenerateSapData.Notebook": "a1f0c0de-0002-4a00-9000-5a70da7a0002",
     "PostDeploymentNotebook.Notebook": "a1f0c0de-0003-4a00-9000-5a70da7a0003",
+    "SAP_Manufacturing_Model.SemanticModel": "a1f0c0de-0004-4a00-9000-5a70da7a0004",
+    "SAP_Manufacturing_DataAgent.DataAgent": "a1f0c0de-0005-4a00-9000-5a70da7a0005",
 }
 
 PLATFORM_SCHEMA = ("https://developer.microsoft.com/json-schemas/fabric/"
@@ -66,15 +75,6 @@ def _md_cell(md):
     return '\n# MARKDOWN ********************\n\n' + body + '\n'
 
 
-def _param_cell(src):
-    meta = ('\n# METADATA ********************\n\n'
-            '# META {\n'
-            '# META   "language": "python",\n'
-            '# META   "language_group": "synapse_pyspark"\n'
-            '# META }\n')
-    return '\n# PARAMETERS CELL ********************\n\n' + src.rstrip("\n") + '\n' + meta
-
-
 def build_notebook(cells, dependencies=None):
     return _nb_header(dependencies) + "".join(cells)
 
@@ -85,6 +85,23 @@ def write_item(rel_dir, item_type, display, description, nb_cells=None, dependen
     (d / ".platform").write_text(platform(item_type, display, description), encoding="utf-8")
     if nb_cells is not None:
         (d / "notebook-content.py").write_text(build_notebook(nb_cells, dependencies), encoding="utf-8")
+    return d
+
+
+def write_definition_item(rel_dir, item_type, display, description, src_tree):
+    """Emit a definition-backed item (SemanticModel/DataAgent): a .platform plus a
+    verbatim copy of the parameterized definition tree under src/."""
+    d = OUT / rel_dir / ("%s.%s" % (display, item_type))
+    if d.exists():
+        shutil.rmtree(d)
+    d.mkdir(parents=True, exist_ok=True)
+    (d / ".platform").write_text(platform(item_type, display, description), encoding="utf-8")
+    for f in sorted((SRC / src_tree).rglob("*")):
+        if f.is_file():
+            rel = f.relative_to(SRC / src_tree)
+            dest = d / rel
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
     return d
 
 
@@ -111,19 +128,29 @@ def main():
                nb_cells=[_md_cell(gen_md), _code_cell(read_src("gen_sap_data.py"))],
                dependencies=LAKEHOUSE_DEP)
 
-    # ---- PostDeploymentNotebook (entry point) ----
+    # ---- SemanticModel (Direct Lake) - deployed by fabric-cicd ----
+    write_definition_item("SemanticModel", "SemanticModel", "SAP_Manufacturing_Model",
+                          "Direct Lake model over the SAP lakehouse with SAP PP measures.",
+                          "semantic_model")
+
+    # ---- DataAgent - deployed by fabric-cicd, grounded on the model ----
+    write_definition_item("DataAgent", "DataAgent", "SAP_Manufacturing_DataAgent",
+                          "SAP PP / shopfloor / bottleneck analysis agent on the model.",
+                          "data_agent")
+
+    # ---- PostDeploymentNotebook (entry point) - seed data + reframe model ----
     intro = (
-        "# Post-Deployment - build the demo\n\n"
-        "Click **Run all**. This notebook:\n"
+        "# Post-Deployment - seed data & reframe the model\n\n"
+        "Click **Run all**. The Lakehouse, GenerateSapData notebook, the\n"
+        "**SAP_Manufacturing_Model** Direct Lake semantic model and the\n"
+        "**SAP_Manufacturing_DataAgent** are all deployed for you by fabric-cicd.\n\n"
+        "This notebook completes the runtime steps that need the *live* lakehouse:\n"
         "1. Discovers the deployed workspace and lakehouse.\n"
         "2. Runs **GenerateSapData** to create the 17 SAP Delta tables.\n"
-        "3. Builds the **SAP_Manufacturing_Model** Direct Lake semantic model and\n"
-        "   reframes it.\n"
-        "4. Creates and publishes the **SAP_Manufacturing_DataAgent** grounded on\n"
-        "   that model.\n\n"
-        "When it finishes, open the data agent and ask e.g. *\"How many orders are\n"
-        "released and how many are in backlog?\"* or *\"How many operations sit at the\n"
-        "Laser Balancing bottleneck?\"*")
+        "3. Reframes the Direct Lake model so it picks up the freshly written tables.\n\n"
+        "When it finishes, open **SAP_Manufacturing_DataAgent** and ask e.g. *\"How\n"
+        "many orders are released and how many are in backlog?\"* or *\"How many\n"
+        "operations sit at the Laser Balancing bottleneck?\"*")
 
     discover = (
         "# --- 1) Discover workspace + lakehouse -------------------------------------\n"
@@ -167,45 +194,26 @@ def main():
         "    _rec(\"generate_data\", \"error\", traceback.format_exc()); _writelog(); raise\n"
         "print(\"SAP tables generated.\")")
 
-    model_cell = (
-        "# --- 3) Build + reframe the Direct Lake semantic model ---------------------\n"
-        + read_src("model_builder.py")
+    refresh_cell = (
+        "# --- 3) Reframe the deployed Direct Lake semantic model --------------------\n"
+        + read_src("refresh_model.py")
         + "\n\ntry:\n"
-        "    model_id = deploy_semantic_model(WORKSPACE_ID, LAKEHOUSE_ID)\n"
-        "    _rec(\"model\", \"ok\", model_id)\n"
+        "    model_id = refresh_semantic_model(WORKSPACE_ID, LAKEHOUSE_ID)\n"
+        "    _rec(\"model_refresh\", \"ok\", model_id)\n"
         "except Exception:\n"
-        "    _rec(\"model\", \"error\", traceback.format_exc()); _writelog(); raise\n"
-        "print(\"Semantic model ready:\", model_id)")
-
-    agent_cell = (
-        "# --- 4) Create + publish the data agent ------------------------------------\n"
-        + read_src("agent_setup.py")
-        + "\n\ntry:\n"
-        "    setup_agent()\n"
-        "    _rec(\"agent\", \"ok\")\n"
-        "except Exception:\n"
-        "    _rec(\"agent\", \"error\", traceback.format_exc()); _writelog(); raise\n"
+        "    _rec(\"model_refresh\", \"error\", traceback.format_exc()); _writelog(); raise\n"
         "_writelog()\n"
+        "print(\"Semantic model reframed:\", model_id)\n"
         "print(\"POST_DEPLOY_DONE\")")
 
     write_item("Develop", "Notebook", "PostDeploymentNotebook",
-               "Entry point: seed data, build model, publish the data agent.",
+               "Entry point: seed data and reframe the deployed Direct Lake model.",
                nb_cells=[_md_cell(intro), _code_cell(discover), _code_cell(run_gen),
-                         _code_cell(model_cell), _code_cell(agent_cell)],
+                         _code_cell(refresh_cell)],
                dependencies=LAKEHOUSE_DEP)
 
-    # ---- parameter.yml: bind the deployed lakehouse into GenerateSapData ----
-    (OUT / "parameter.yml").write_text(
-        "find_replace:\n"
-        "  # Bind the GenerateSapData notebook's default lakehouse to the deployed one.\n"
-        "  - find_value: \"__LAKEHOUSE_ID__\"\n"
-        "    replace_value:\n"
-        "      _ALL_: \"$items.Lakehouse.SAP_Manufacturing_LH.$id\"\n"
-        "    item_type: \"Notebook\"\n"
-        "  - find_value: \"__WORKSPACE_ID__\"\n"
-        "    replace_value:\n"
-        "      _ALL_: \"$workspace.$id\"\n"
-        "    item_type: \"Notebook\"\n", encoding="utf-8")
+    # ---- parameter.yml: bind deployed ids into notebooks, model and agent ----
+    (OUT / "parameter.yml").write_text(PARAMETER_YML, encoding="utf-8")
 
     # ---- Readme.md (workspace-level) ----
     (OUT / "Readme.md").write_text(WORKSPACE_README, encoding="utf-8")
@@ -216,27 +224,62 @@ def main():
             print("  ", p.relative_to(OUT))
 
 
+PARAMETER_YML = """find_replace:
+  # --- Notebooks: bind the default lakehouse to the deployed one -------------
+  - find_value: "__LAKEHOUSE_ID__"
+    replace_value:
+      _ALL_: "$items.Lakehouse.SAP_Manufacturing_LH.$id"
+    item_type: "Notebook"
+  - find_value: "__WORKSPACE_ID__"
+    replace_value:
+      _ALL_: "$workspace.$id"
+    item_type: "Notebook"
+
+  # --- SemanticModel: bind the Direct Lake expression to the deployed lakehouse
+  - find_value: "__LAKEHOUSE_ID__"
+    replace_value:
+      _ALL_: "$items.Lakehouse.SAP_Manufacturing_LH.$id"
+    item_type: "SemanticModel"
+  - find_value: "__WORKSPACE_ID__"
+    replace_value:
+      _ALL_: "$workspace.$id"
+    item_type: "SemanticModel"
+
+  # --- DataAgent: bind the datasource to the deployed model + workspace -------
+  - find_value: "__SEMANTIC_MODEL_ID__"
+    replace_value:
+      _ALL_: "$items.SemanticModel.SAP_Manufacturing_Model.$id"
+    item_type: "DataAgent"
+  - find_value: "__WORKSPACE_ID__"
+    replace_value:
+      _ALL_: "$workspace.$id"
+    item_type: "DataAgent"
+"""
+
+
 WORKSPACE_README = """# Talk to your SAP data - Manufacturing Edition
 
 A Fabric jumpstart that lets you ask natural-language questions about SAP
-production data. It deploys:
+production data. fabric-cicd deploys the whole item tree:
 
-- **SAP_Manufacturing_LH** - a lakehouse with 17 synthetic SAP tables
+- **SAP_Manufacturing_LH** - a lakehouse for 17 synthetic SAP tables
   (MARA/MARC/MARD, COOIS order headers & operations, confirmations, CO24
   missing parts, MATDOC movements, work centers incl. the *Laser Balancing*
   bottleneck, and S&OP targets).
 - **GenerateSapData** - notebook that synthesizes the Delta tables.
 - **SAP_Manufacturing_Model** - a Direct Lake semantic model with SAP business
   measures (order load, backlog, missing parts, scrap rate, bottleneck load,
-  posting delay).
+  posting delay). Bound to the deployed lakehouse via parameter.yml.
 - **SAP_Manufacturing_DataAgent** - a data agent grounded on the model with SAP
-  PP / shopfloor / bottleneck-analysis instructions.
+  PP / shopfloor / bottleneck-analysis instructions. Bound to the deployed
+  model via parameter.yml.
+- **PostDeploymentNotebook** - entry point.
 
 ## Getting started
 
-Run the **PostDeploymentNotebook** (Run all). It seeds the data, builds and
-reframes the semantic model, and publishes the data agent. Then open the data
-agent and try:
+Run the **PostDeploymentNotebook** (Run all). It seeds the SAP data and reframes
+the Direct Lake model so it picks up the freshly written tables. Then open the
+data agent and try:
 
 - *How many production orders are released, and how many are in backlog?*
 - *How many operations sit at the Laser Balancing bottleneck?*

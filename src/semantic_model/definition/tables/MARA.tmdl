@@ -1,0 +1,53 @@
+table MARA
+
+	column MATNR
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MATNR
+
+	column MTART
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MTART
+
+	column MATKL
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MATKL
+
+	column MEINS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MEINS
+
+	column NTGEW
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: NTGEW
+
+	column GEWEI
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GEWEI
+
+	column PRDHA
+		dataType: string
+		summarizeBy: none
+		sourceColumn: PRDHA
+
+	column ProductGroup
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductGroup
+
+	column MAKTX
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MAKTX
+
+	partition MARA = entity
+		mode: directLake
+		source
+			entityName: mara
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

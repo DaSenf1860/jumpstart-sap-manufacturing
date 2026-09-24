@@ -1,0 +1,108 @@
+table COOIS_OrderOperations
+
+	/// Total number of order operations
+	measure 'Operation Count' = COUNTROWS('COOIS_OrderOperations')
+		formatString: #,0
+
+	/// Operations at the bottleneck work center Laser Balancing
+	measure 'Bottleneck Operation Count (Laser Balancing)' = CALCULATE(COUNTROWS('COOIS_OrderOperations'), 'COOIS_OrderOperations'[BottleneckOperation] = 1)
+		formatString: #,0
+
+	column Order
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Order
+
+	column Operation
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Operation
+
+	column WorkCenter
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WorkCenter
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column OperationText
+		dataType: string
+		summarizeBy: none
+		sourceColumn: OperationText
+
+	column StatusShort
+		dataType: string
+		summarizeBy: none
+		sourceColumn: StatusShort
+
+	column SystemStatus
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SystemStatus
+
+	column ControlKey
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ControlKey
+
+	column TargetQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: TargetQuantity
+
+	column ActualQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: ActualQuantity
+
+	column SetupTime
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: SetupTime
+
+	column MachineTime
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: MachineTime
+
+	column LaborTime
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: LaborTime
+
+	column StartDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: StartDate
+
+	column FinishDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: FinishDate
+
+	column Material
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Material
+
+	column ProductGroup
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductGroup
+
+	column BottleneckOperation
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: BottleneckOperation
+
+	partition COOIS_OrderOperations = entity
+		mode: directLake
+		source
+			entityName: coois_orderoperations
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

@@ -1,0 +1,23 @@
+table ActivityTypes
+
+	column ActivityType
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ActivityType
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	column Unit
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Unit
+
+	partition ActivityTypes = entity
+		mode: directLake
+		source
+			entityName: activitytypes
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

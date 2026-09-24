@@ -1,0 +1,28 @@
+table MovementTypes
+
+	column MovementType
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MovementType
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	column Sign
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Sign
+
+	column Direction
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Direction
+
+	partition MovementTypes = entity
+		mode: directLake
+		source
+			entityName: movementtypes
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

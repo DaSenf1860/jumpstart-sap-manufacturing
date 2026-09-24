@@ -1,0 +1,43 @@
+table D_Part
+
+	column MATNR
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MATNR
+
+	column ProductGroup
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductGroup
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	column ABC_Class
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ABC_Class
+
+	column XYZ_Class
+		dataType: string
+		summarizeBy: none
+		sourceColumn: XYZ_Class
+
+	column CriticalPart
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: CriticalPart
+
+	column StandardPrice
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: StandardPrice
+
+	partition D_Part = entity
+		mode: directLake
+		source
+			entityName: d_part
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

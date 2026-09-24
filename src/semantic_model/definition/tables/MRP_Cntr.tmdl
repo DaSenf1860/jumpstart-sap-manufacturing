@@ -1,0 +1,33 @@
+table MRP_Cntr
+
+	column DISPO
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DISPO
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+
+	column ResponsibilityArea
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ResponsibilityArea
+
+	column Email
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Email
+
+	partition MRP_Cntr = entity
+		mode: directLake
+		source
+			entityName: mrp_cntr
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

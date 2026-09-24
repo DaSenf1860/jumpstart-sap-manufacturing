@@ -1,0 +1,34 @@
+table tmp_PartStockV1
+
+	column Part
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Part
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column Stock
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Stock
+
+	column Unit
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Unit
+
+	column SnapshotTime
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		summarizeBy: none
+		sourceColumn: SnapshotTime
+
+	partition tmp_PartStockV1 = entity
+		mode: directLake
+		source
+			entityName: tmp_partstockv1
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

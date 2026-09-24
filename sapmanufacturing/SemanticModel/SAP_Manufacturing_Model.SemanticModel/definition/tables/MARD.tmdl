@@ -1,0 +1,39 @@
+table MARD
+
+	column MATNR
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MATNR
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column LGORT
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LGORT
+
+	column LABST
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: LABST
+
+	column INSME
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: INSME
+
+	column StockDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: StockDate
+
+	partition MARD = entity
+		mode: directLake
+		source
+			entityName: mard
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

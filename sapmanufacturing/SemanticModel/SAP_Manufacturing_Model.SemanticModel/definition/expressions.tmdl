@@ -1,0 +1,6 @@
+expression 'DirectLake - SAP Manufacturing' =
+		let
+			Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/__WORKSPACE_ID__/__LAKEHOUSE_ID__", [HierarchicalNavigation=true])
+		in
+			Source
+

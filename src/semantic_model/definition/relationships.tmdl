@@ -1,0 +1,56 @@
+relationship rel_00_MARC_MARA
+	fromColumn: MARC.MATNR
+	toColumn: MARA.MATNR
+
+relationship rel_01_MARD_MARA
+	fromColumn: MARD.MATNR
+	toColumn: MARA.MATNR
+
+relationship rel_02_D_Part_MARA
+	fromColumn: D_Part.MATNR
+	toColumn: MARA.MATNR
+
+relationship rel_03_MARA_ProductGroup
+	fromColumn: MARA.ProductGroup
+	toColumn: ProductGroup.ProductGroup
+
+relationship rel_04_MARA_ProductHierarchy
+	fromColumn: MARA.PRDHA
+	toColumn: ProductHierarchy.ProductHierarchy
+
+relationship rel_05_MARC_MRP_Cntr
+	fromColumn: MARC.DISPO
+	toColumn: MRP_Cntr.DISPO
+
+relationship rel_06_COOIS_OrderHeaders_MARA
+	fromColumn: COOIS_OrderHeaders.Material
+	toColumn: MARA.MATNR
+
+relationship rel_07_COOIS_OrderOperations_COOIS_OrderHeaders
+	fromColumn: COOIS_OrderOperations.Order
+	toColumn: COOIS_OrderHeaders.Order
+
+relationship rel_08_COOIS_OrderOperations_WorkCenters
+	fromColumn: COOIS_OrderOperations.WorkCenter
+	toColumn: WorkCenters.WorkCenter
+
+relationship rel_09_COOIS_Confirmations_COOIS_OrderHeaders
+	fromColumn: COOIS_Confirmations.Order
+	toColumn: COOIS_OrderHeaders.Order
+
+relationship rel_10_COOIS_Confirmations_WorkCenters
+	fromColumn: COOIS_Confirmations.WorkCenter
+	toColumn: WorkCenters.WorkCenter
+
+relationship rel_11_CO24_COOIS_OrderHeaders
+	fromColumn: CO24.Order
+	toColumn: COOIS_OrderHeaders.Order
+
+relationship rel_12_MATDOC_COOIS_OrderHeaders
+	fromColumn: MATDOC.Order
+	toColumn: COOIS_OrderHeaders.Order
+
+relationship rel_13_SOP_Targets_ProductGroup
+	fromColumn: SOP_Targets.ProductGroup
+	toColumn: ProductGroup.ProductGroup
+

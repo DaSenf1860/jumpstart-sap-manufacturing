@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "SAP_Manufacturing_Model",
+    "description": "Direct Lake model over the SAP lakehouse with SAP PP measures."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a1f0c0de-0004-4a00-9000-5a70da7a0004"
+  }
+}

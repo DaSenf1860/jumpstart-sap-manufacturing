@@ -1,0 +1,43 @@
+table MARC
+
+	column MATNR
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MATNR
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column DISPO
+		dataType: string
+		summarizeBy: none
+		sourceColumn: DISPO
+
+	column BESKZ
+		dataType: string
+		summarizeBy: none
+		sourceColumn: BESKZ
+
+	column FEVOR
+		dataType: string
+		summarizeBy: none
+		sourceColumn: FEVOR
+
+	column DZEIT
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: DZEIT
+
+	column InHouseProductionTimeDays
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: InHouseProductionTimeDays
+
+	partition MARC = entity
+		mode: directLake
+		source
+			entityName: marc
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

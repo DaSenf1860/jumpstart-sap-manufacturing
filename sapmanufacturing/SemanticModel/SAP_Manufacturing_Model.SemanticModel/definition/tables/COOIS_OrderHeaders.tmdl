@@ -1,0 +1,116 @@
+table COOIS_OrderHeaders
+
+	/// Total number of production orders
+	measure 'Order Count' = COUNTROWS('COOIS_OrderHeaders')
+		formatString: #,0
+
+	/// Released orders (status REL) = order load
+	measure 'Released Order Load' = CALCULATE([Order Count], CONTAINSSTRING('COOIS_OrderHeaders'[SystemStatus], "REL"))
+		formatString: #,0
+
+	/// Open orders with a scheduled finish date in the past
+	measure 'Backlog Order Count' = CALCULATE([Order Count], 'COOIS_OrderHeaders'[Backlog] = 1)
+		formatString: #,0
+
+	/// Sum of order quantities
+	measure 'Total Order Quantity' = SUM('COOIS_OrderHeaders'[OrderQuantity])
+		formatString: #,0
+
+	/// Sum of delivered quantities
+	measure 'Total Delivered Quantity' = SUM('COOIS_OrderHeaders'[DeliveredQuantity])
+		formatString: #,0
+
+	column Order
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Order
+
+	column Material
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Material
+
+	column MaterialText
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MaterialText
+
+	column WERKS
+		dataType: string
+		summarizeBy: none
+		sourceColumn: WERKS
+
+	column OrderType
+		dataType: string
+		summarizeBy: none
+		sourceColumn: OrderType
+
+	column OrderQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+	column Unit
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Unit
+
+	column SystemStatus
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SystemStatus
+
+	column StatusShort
+		dataType: string
+		summarizeBy: none
+		sourceColumn: StatusShort
+
+	column Priority
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Priority
+
+	column SOP_Relevant
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: SOP_Relevant
+
+	column Backlog
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Backlog
+
+	column CreationDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: CreationDate
+
+	column StartDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: StartDate
+
+	column FinishDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: FinishDate
+
+	column DeliveredQuantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: DeliveredQuantity
+
+	column ProductGroup
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductGroup
+
+	partition COOIS_OrderHeaders = entity
+		mode: directLake
+		source
+			entityName: coois_orderheaders
+			expressionSource: 'DirectLake - SAP Manufacturing'
+

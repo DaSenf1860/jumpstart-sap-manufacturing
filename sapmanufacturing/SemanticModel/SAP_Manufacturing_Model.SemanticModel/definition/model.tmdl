@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+
+ref table MARA
+ref table MARC
+ref table MARD
+ref table D_Part
+ref table MRP_Cntr
+ref table ProductHierarchy
+ref table ProductGroup
+ref table WorkCenters
+ref table ActivityTypes
+ref table MovementTypes
+ref table COOIS_OrderHeaders
+ref table COOIS_OrderOperations
+ref table COOIS_Confirmations
+ref table CO24
+ref table MATDOC
+ref table SOP_Targets
+ref table tmp_PartStockV1
+

@@ -1,0 +1,1598 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json",
+  "artifactId": "__SEMANTIC_MODEL_ID__",
+  "workspaceId": "__WORKSPACE_ID__",
+  "dataSourceInstructions": null,
+  "displayName": "SAP_Manufacturing_Model",
+  "type": "semantic_model",
+  "userDescription": null,
+  "metadata": {
+    "csdl_relationships": "[{\"FromTable\":\"MARA\",\"FromColumn\":\"ProductGroup\",\"ToTable\":\"ProductGroup\",\"ToColumn\":\"ProductGroup2\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"MARA\",\"FromColumn\":\"PRDHA\",\"ToTable\":\"ProductHierarchy\",\"ToColumn\":\"ProductHierarchy2\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"MARC\",\"FromColumn\":\"MATNR\",\"ToTable\":\"MARA\",\"ToColumn\":\"MATNR\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"MARC\",\"FromColumn\":\"DISPO\",\"ToTable\":\"MRP_Cntr\",\"ToColumn\":\"DISPO\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"MARD\",\"FromColumn\":\"MATNR\",\"ToTable\":\"MARA\",\"ToColumn\":\"MATNR\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"D_Part\",\"FromColumn\":\"MATNR\",\"ToTable\":\"MARA\",\"ToColumn\":\"MATNR\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"COOIS_OrderHeaders\",\"FromColumn\":\"Material\",\"ToTable\":\"MARA\",\"ToColumn\":\"MATNR\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"COOIS_OrderOperations\",\"FromColumn\":\"Order\",\"ToTable\":\"COOIS_OrderHeaders\",\"ToColumn\":\"Order\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"COOIS_OrderOperations\",\"FromColumn\":\"WorkCenter\",\"ToTable\":\"WorkCenters\",\"ToColumn\":\"WorkCenter\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"COOIS_Confirmations\",\"FromColumn\":\"Order\",\"ToTable\":\"COOIS_OrderHeaders\",\"ToColumn\":\"Order\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"COOIS_Confirmations\",\"FromColumn\":\"WorkCenter\",\"ToTable\":\"WorkCenters\",\"ToColumn\":\"WorkCenter\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"CO24\",\"FromColumn\":\"Order\",\"ToTable\":\"COOIS_OrderHeaders\",\"ToColumn\":\"Order\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"MATDOC\",\"FromColumn\":\"Order\",\"ToTable\":\"COOIS_OrderHeaders\",\"ToColumn\":\"Order\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"},{\"FromTable\":\"SOP_Targets\",\"FromColumn\":\"ProductGroup\",\"ToTable\":\"ProductGroup\",\"ToColumn\":\"ProductGroup2\",\"IsActive\":true,\"IsBidirectional\":false,\"Cardinality\":\"ManyToOne\"}]"
+  },
+  "elements": [
+    {
+      "id": "MARA",
+      "is_selected": false,
+      "display_name": "MARA",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "MATNR",
+          "is_selected": true,
+          "display_name": "MATNR",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MTART",
+          "is_selected": true,
+          "display_name": "MTART",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MATKL",
+          "is_selected": true,
+          "display_name": "MATKL",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MEINS",
+          "is_selected": true,
+          "display_name": "MEINS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "NTGEW",
+          "is_selected": true,
+          "display_name": "NTGEW",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "GEWEI",
+          "is_selected": true,
+          "display_name": "GEWEI",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "PRDHA",
+          "is_selected": true,
+          "display_name": "PRDHA",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ProductGroup",
+          "is_selected": true,
+          "display_name": "ProductGroup",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MAKTX",
+          "is_selected": true,
+          "display_name": "MAKTX",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "MARC",
+      "is_selected": false,
+      "display_name": "MARC",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "MATNR",
+          "is_selected": true,
+          "display_name": "MATNR",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "DISPO",
+          "is_selected": true,
+          "display_name": "DISPO",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "BESKZ",
+          "is_selected": true,
+          "display_name": "BESKZ",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "FEVOR",
+          "is_selected": true,
+          "display_name": "FEVOR",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "DZEIT",
+          "is_selected": true,
+          "display_name": "DZEIT",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "InHouseProductionTimeDays",
+          "is_selected": true,
+          "display_name": "InHouseProductionTimeDays",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "MARD",
+      "is_selected": false,
+      "display_name": "MARD",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "MATNR",
+          "is_selected": true,
+          "display_name": "MATNR",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "LGORT",
+          "is_selected": true,
+          "display_name": "LGORT",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "LABST",
+          "is_selected": true,
+          "display_name": "LABST",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "INSME",
+          "is_selected": true,
+          "display_name": "INSME",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "StockDate",
+          "is_selected": true,
+          "display_name": "StockDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "D_Part",
+      "is_selected": false,
+      "display_name": "D_Part",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "MATNR",
+          "is_selected": true,
+          "display_name": "MATNR",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ProductGroup",
+          "is_selected": true,
+          "display_name": "ProductGroup",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Description",
+          "is_selected": true,
+          "display_name": "Description",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ABC_Class",
+          "is_selected": true,
+          "display_name": "ABC_Class",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "XYZ_Class",
+          "is_selected": true,
+          "display_name": "XYZ_Class",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "CriticalPart",
+          "is_selected": true,
+          "display_name": "CriticalPart",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "StandardPrice",
+          "is_selected": true,
+          "display_name": "StandardPrice",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "MRP_Cntr",
+      "is_selected": false,
+      "display_name": "MRP_Cntr",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "DISPO",
+          "is_selected": true,
+          "display_name": "DISPO",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Name",
+          "is_selected": true,
+          "display_name": "Name",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ResponsibilityArea",
+          "is_selected": true,
+          "display_name": "ResponsibilityArea",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Email",
+          "is_selected": true,
+          "display_name": "Email",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "ProductHierarchy",
+      "is_selected": false,
+      "display_name": "ProductHierarchy",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "ProductHierarchy2",
+          "is_selected": true,
+          "display_name": "ProductHierarchy",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Description",
+          "is_selected": true,
+          "display_name": "Description",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Level",
+          "is_selected": true,
+          "display_name": "Level",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Parent",
+          "is_selected": true,
+          "display_name": "Parent",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "ProductGroup",
+      "is_selected": false,
+      "display_name": "ProductGroup",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "ProductGroup2",
+          "is_selected": true,
+          "display_name": "ProductGroup",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Description",
+          "is_selected": true,
+          "display_name": "Description",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "WorkCenters",
+      "is_selected": false,
+      "display_name": "WorkCenters",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "WorkCenter",
+          "is_selected": true,
+          "display_name": "WorkCenter",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Description",
+          "is_selected": true,
+          "display_name": "Description",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "NGRAD",
+          "is_selected": true,
+          "display_name": "NGRAD",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "EINZH",
+          "is_selected": true,
+          "display_name": "EINZH",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "AZNOR",
+          "is_selected": true,
+          "display_name": "AZNOR",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "CapacityCategory",
+          "is_selected": true,
+          "display_name": "CapacityCategory",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Bottleneck",
+          "is_selected": true,
+          "display_name": "Bottleneck",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "TheoreticalCapacityHrDay",
+          "is_selected": true,
+          "display_name": "TheoreticalCapacityHrDay",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "ActivityTypes",
+      "is_selected": false,
+      "display_name": "ActivityTypes",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "ActivityType",
+          "is_selected": true,
+          "display_name": "ActivityType",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Description",
+          "is_selected": true,
+          "display_name": "Description",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Unit",
+          "is_selected": true,
+          "display_name": "Unit",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "MovementTypes",
+      "is_selected": false,
+      "display_name": "MovementTypes",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "MovementType",
+          "is_selected": true,
+          "display_name": "MovementType",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Description",
+          "is_selected": true,
+          "display_name": "Description",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Sign",
+          "is_selected": true,
+          "display_name": "Sign",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Direction",
+          "is_selected": true,
+          "display_name": "Direction",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "COOIS_OrderHeaders",
+      "is_selected": false,
+      "display_name": "COOIS_OrderHeaders",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "Order",
+          "is_selected": true,
+          "display_name": "Order",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Material",
+          "is_selected": true,
+          "display_name": "Material",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MaterialText",
+          "is_selected": true,
+          "display_name": "MaterialText",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "OrderType",
+          "is_selected": true,
+          "display_name": "OrderType",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "OrderQuantity",
+          "is_selected": true,
+          "display_name": "OrderQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Unit",
+          "is_selected": true,
+          "display_name": "Unit",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "SystemStatus",
+          "is_selected": true,
+          "display_name": "SystemStatus",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "StatusShort",
+          "is_selected": true,
+          "display_name": "StatusShort",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Priority",
+          "is_selected": true,
+          "display_name": "Priority",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "SOP_Relevant",
+          "is_selected": true,
+          "display_name": "SOP_Relevant",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Backlog",
+          "is_selected": true,
+          "display_name": "Backlog",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "CreationDate",
+          "is_selected": true,
+          "display_name": "CreationDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "StartDate",
+          "is_selected": true,
+          "display_name": "StartDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "FinishDate",
+          "is_selected": true,
+          "display_name": "FinishDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "DeliveredQuantity",
+          "is_selected": true,
+          "display_name": "DeliveredQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ProductGroup",
+          "is_selected": true,
+          "display_name": "ProductGroup",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Order_Count",
+          "is_selected": true,
+          "display_name": "Order Count",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Total number of production orders",
+          "children": []
+        },
+        {
+          "id": "Released_Order_Load",
+          "is_selected": true,
+          "display_name": "Released Order Load",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Released orders (status REL) = order load",
+          "children": []
+        },
+        {
+          "id": "Backlog_Order_Count",
+          "is_selected": true,
+          "display_name": "Backlog Order Count",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Open orders with a scheduled finish date in the past",
+          "children": []
+        },
+        {
+          "id": "Total_Order_Quantity",
+          "is_selected": true,
+          "display_name": "Total Order Quantity",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Sum of order quantities",
+          "children": []
+        },
+        {
+          "id": "Total_Delivered_Quantity",
+          "is_selected": true,
+          "display_name": "Total Delivered Quantity",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Sum of delivered quantities",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "COOIS_OrderOperations",
+      "is_selected": false,
+      "display_name": "COOIS_OrderOperations",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "Order",
+          "is_selected": true,
+          "display_name": "Order",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Operation",
+          "is_selected": true,
+          "display_name": "Operation",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WorkCenter",
+          "is_selected": true,
+          "display_name": "WorkCenter",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "OperationText",
+          "is_selected": true,
+          "display_name": "OperationText",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "StatusShort",
+          "is_selected": true,
+          "display_name": "StatusShort",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "SystemStatus",
+          "is_selected": true,
+          "display_name": "SystemStatus",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ControlKey",
+          "is_selected": true,
+          "display_name": "ControlKey",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "TargetQuantity",
+          "is_selected": true,
+          "display_name": "TargetQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ActualQuantity",
+          "is_selected": true,
+          "display_name": "ActualQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "SetupTime",
+          "is_selected": true,
+          "display_name": "SetupTime",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MachineTime",
+          "is_selected": true,
+          "display_name": "MachineTime",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "LaborTime",
+          "is_selected": true,
+          "display_name": "LaborTime",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "StartDate",
+          "is_selected": true,
+          "display_name": "StartDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "FinishDate",
+          "is_selected": true,
+          "display_name": "FinishDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Material",
+          "is_selected": true,
+          "display_name": "Material",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ProductGroup",
+          "is_selected": true,
+          "display_name": "ProductGroup",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "BottleneckOperation",
+          "is_selected": true,
+          "display_name": "BottleneckOperation",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Operation_Count",
+          "is_selected": true,
+          "display_name": "Operation Count",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Total number of order operations",
+          "children": []
+        },
+        {
+          "id": "Bottleneck_Operation_Count__Laser_Balancing_",
+          "is_selected": true,
+          "display_name": "Bottleneck Operation Count (Laser Balancing)",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Operations at the bottleneck work center Laser Balancing",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "COOIS_Confirmations",
+      "is_selected": false,
+      "display_name": "COOIS_Confirmations",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "Confirmation",
+          "is_selected": true,
+          "display_name": "Confirmation",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Order",
+          "is_selected": true,
+          "display_name": "Order",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Operation",
+          "is_selected": true,
+          "display_name": "Operation",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WorkCenter",
+          "is_selected": true,
+          "display_name": "WorkCenter",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "YieldQuantity",
+          "is_selected": true,
+          "display_name": "YieldQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ScrapQuantity",
+          "is_selected": true,
+          "display_name": "ScrapQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ReworkQuantity",
+          "is_selected": true,
+          "display_name": "ReworkQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ActualMachineTime",
+          "is_selected": true,
+          "display_name": "ActualMachineTime",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ActualLaborTime",
+          "is_selected": true,
+          "display_name": "ActualLaborTime",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ActualEnd",
+          "is_selected": true,
+          "display_name": "ActualEnd",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "SAP_PostingTime",
+          "is_selected": true,
+          "display_name": "SAP_PostingTime",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "DelayHours",
+          "is_selected": true,
+          "display_name": "DelayHours",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Cancelled",
+          "is_selected": true,
+          "display_name": "Cancelled",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Material",
+          "is_selected": true,
+          "display_name": "Material",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Total_Yield",
+          "is_selected": true,
+          "display_name": "Total Yield",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Confirmed good quantity",
+          "children": []
+        },
+        {
+          "id": "Total_Scrap",
+          "is_selected": true,
+          "display_name": "Total Scrap",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Confirmed scrap quantity",
+          "children": []
+        },
+        {
+          "id": "Total_Rework",
+          "is_selected": true,
+          "display_name": "Total Rework",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Confirmed rework quantity",
+          "children": []
+        },
+        {
+          "id": "Scrap_Rate",
+          "is_selected": true,
+          "display_name": "Scrap Rate",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Scrap relative to yield",
+          "children": []
+        },
+        {
+          "id": "Avg_Posting_Delay_Hours",
+          "is_selected": true,
+          "display_name": "Avg Posting Delay Hours",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Mean delay between actual completion and SAP posting, in hours",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "CO24",
+      "is_selected": false,
+      "display_name": "CO24",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "Order",
+          "is_selected": true,
+          "display_name": "Order",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Component",
+          "is_selected": true,
+          "display_name": "Component",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "LGORT",
+          "is_selected": true,
+          "display_name": "LGORT",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Reqmnt_qty",
+          "is_selected": true,
+          "display_name": "Reqmnt_qty",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Comm_qty",
+          "is_selected": true,
+          "display_name": "Comm_qty",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Qty_issued",
+          "is_selected": true,
+          "display_name": "Qty_issued",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ShortageQuantity",
+          "is_selected": true,
+          "display_name": "ShortageQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MissingPart",
+          "is_selected": true,
+          "display_name": "MissingPart",
+          "type": "semantic_model.column",
+          "data_type": "Int64",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "RequirementDate",
+          "is_selected": true,
+          "display_name": "RequirementDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ComponentText",
+          "is_selected": true,
+          "display_name": "ComponentText",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Missing_Part_Count",
+          "is_selected": true,
+          "display_name": "Missing Part Count",
+          "type": "semantic_model.measure",
+          "data_type": "Int64",
+          "description": "Number of components with a shortage",
+          "children": []
+        },
+        {
+          "id": "Total_Shortage_Quantity",
+          "is_selected": true,
+          "display_name": "Total Shortage Quantity",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Sum of all shortage quantities",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "MATDOC",
+      "is_selected": false,
+      "display_name": "MATDOC",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "Mblnr",
+          "is_selected": true,
+          "display_name": "Mblnr",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Line",
+          "is_selected": true,
+          "display_name": "Line",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Matnr",
+          "is_selected": true,
+          "display_name": "Matnr",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "LGORT",
+          "is_selected": true,
+          "display_name": "LGORT",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "MovementType",
+          "is_selected": true,
+          "display_name": "MovementType",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Quantity",
+          "is_selected": true,
+          "display_name": "Quantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Unit",
+          "is_selected": true,
+          "display_name": "Unit",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "PostingDate",
+          "is_selected": true,
+          "display_name": "PostingDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "DocumentDate",
+          "is_selected": true,
+          "display_name": "DocumentDate",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Order",
+          "is_selected": true,
+          "display_name": "Order",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "CostCenter",
+          "is_selected": true,
+          "display_name": "CostCenter",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "SOP_Targets",
+      "is_selected": false,
+      "display_name": "SOP_Targets",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "ProductGroup",
+          "is_selected": true,
+          "display_name": "ProductGroup",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Description",
+          "is_selected": true,
+          "display_name": "Description",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Period",
+          "is_selected": true,
+          "display_name": "Period",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "TargetQuantity",
+          "is_selected": true,
+          "display_name": "TargetQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "ActualQuantity",
+          "is_selected": true,
+          "display_name": "ActualQuantity",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Deviation",
+          "is_selected": true,
+          "display_name": "Deviation",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Version",
+          "is_selected": true,
+          "display_name": "Version",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Total_Target_Quantity",
+          "is_selected": true,
+          "display_name": "Total Target Quantity",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "S&OP target quantity",
+          "children": []
+        },
+        {
+          "id": "Total_SOP_Actual_Quantity",
+          "is_selected": true,
+          "display_name": "Total SOP Actual Quantity",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "S&OP actual quantity",
+          "children": []
+        },
+        {
+          "id": "SOP_Deviation",
+          "is_selected": true,
+          "display_name": "SOP Deviation",
+          "type": "semantic_model.measure",
+          "data_type": "Double",
+          "description": "Deviation of actual vs target",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "tmp_PartStockV1",
+      "is_selected": false,
+      "display_name": "tmp_PartStockV1",
+      "type": "semantic_model.table",
+      "description": null,
+      "children": [
+        {
+          "id": "Part",
+          "is_selected": true,
+          "display_name": "Part",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "WERKS",
+          "is_selected": true,
+          "display_name": "WERKS",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Stock",
+          "is_selected": true,
+          "display_name": "Stock",
+          "type": "semantic_model.column",
+          "data_type": "Double",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "Unit",
+          "is_selected": true,
+          "display_name": "Unit",
+          "type": "semantic_model.column",
+          "data_type": "String",
+          "description": null,
+          "children": []
+        },
+        {
+          "id": "SnapshotTime",
+          "is_selected": true,
+          "display_name": "SnapshotTime",
+          "type": "semantic_model.column",
+          "data_type": "DateTime",
+          "description": null,
+          "children": []
+        }
+      ]
+    }
+  ]
+}
