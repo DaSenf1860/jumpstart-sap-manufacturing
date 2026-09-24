@@ -12,7 +12,7 @@
   "elements": [
     {
       "id": "MARA",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "MARA",
       "type": "semantic_model.table",
       "description": null,
@@ -102,7 +102,7 @@
     },
     {
       "id": "MARC",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "MARC",
       "type": "semantic_model.table",
       "description": null,
@@ -174,7 +174,7 @@
     },
     {
       "id": "MARD",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "MARD",
       "type": "semantic_model.table",
       "description": null,
@@ -237,7 +237,7 @@
     },
     {
       "id": "D_Part",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "D_Part",
       "type": "semantic_model.table",
       "description": null,
@@ -309,7 +309,7 @@
     },
     {
       "id": "MRP_Cntr",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "MRP_Cntr",
       "type": "semantic_model.table",
       "description": null,
@@ -363,7 +363,7 @@
     },
     {
       "id": "ProductHierarchy",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "ProductHierarchy",
       "type": "semantic_model.table",
       "description": null,
@@ -408,7 +408,7 @@
     },
     {
       "id": "ProductGroup",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "ProductGroup",
       "type": "semantic_model.table",
       "description": null,
@@ -435,7 +435,7 @@
     },
     {
       "id": "WorkCenters",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "WorkCenters",
       "type": "semantic_model.table",
       "description": null,
@@ -525,7 +525,7 @@
     },
     {
       "id": "ActivityTypes",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "ActivityTypes",
       "type": "semantic_model.table",
       "description": null,
@@ -561,7 +561,7 @@
     },
     {
       "id": "MovementTypes",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "MovementTypes",
       "type": "semantic_model.table",
       "description": null,
@@ -606,7 +606,7 @@
     },
     {
       "id": "COOIS_OrderHeaders",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "COOIS_OrderHeaders",
       "type": "semantic_model.table",
       "description": null,
@@ -813,7 +813,7 @@
     },
     {
       "id": "COOIS_OrderOperations",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "COOIS_OrderOperations",
       "type": "semantic_model.table",
       "description": null,
@@ -1002,7 +1002,7 @@
     },
     {
       "id": "COOIS_Confirmations",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "COOIS_Confirmations",
       "type": "semantic_model.table",
       "description": null,
@@ -1191,7 +1191,7 @@
     },
     {
       "id": "CO24",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "CO24",
       "type": "semantic_model.table",
       "description": null,
@@ -1317,7 +1317,7 @@
     },
     {
       "id": "MATDOC",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "MATDOC",
       "type": "semantic_model.table",
       "description": null,
@@ -1434,7 +1434,7 @@
     },
     {
       "id": "SOP_Targets",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "SOP_Targets",
       "type": "semantic_model.table",
       "description": null,
@@ -1542,7 +1542,7 @@
     },
     {
       "id": "tmp_PartStockV1",
-      "is_selected": false,
+      "is_selected": true,
       "display_name": "tmp_PartStockV1",
       "type": "semantic_model.table",
       "description": null,

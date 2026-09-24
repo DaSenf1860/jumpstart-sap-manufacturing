@@ -58,6 +58,18 @@ def main():
             o = json.loads(text)
             o["artifactId"] = "__SEMANTIC_MODEL_ID__"
             o["workspaceId"] = "__WORKSPACE_ID__"
+
+            # Force every table + column to be selected so the data agent is
+            # grounded on the whole model right after deployment. The captured
+            # definition has table-level is_selected=False, which leaves the
+            # agent with no tables until a human ticks them in the portal.
+            def _select_all(elements):
+                for el in elements:
+                    el["is_selected"] = True
+                    if el.get("children"):
+                        _select_all(el["children"])
+            _select_all(o.get("elements", []))
+
             text = json.dumps(o, indent=2)
         _write(da, path, text)
 
